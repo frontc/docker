@@ -42,7 +42,7 @@ if version_greater "$image_version" "$installed_version"; then
       rsync_options="-rlD"
     fi
     rsync $rsync_options --delete --exclude /config/ --exclude /data/ --exclude /custom_apps/ --exclude /themes/ /usr/src/nextcloud/ /var/www/html/
-
+    aria2c --enable-rpc --rpc-allow-origin-all -c -D --log=/var/log/aria2c/aria2c.log --check-certificate=false --save-session=/var/local/aria2c/aria2c.sess --save-session-interval=2 --continue=true --input-file=/var/local/aria2c/aria2c.sess --rpc-save-upload-metadata=true --force-save=true --log-level=warn
     for dir in config data custom_apps themes; do
         if [ ! -d "/var/www/html/$dir" ] || directory_empty "/var/www/html/$dir"; then
             rsync $rsync_options --include "/$dir/" --exclude '/*' /usr/src/nextcloud/ /var/www/html/

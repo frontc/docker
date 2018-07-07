@@ -2,7 +2,6 @@
 FROM php:7.1-apache-stretch
 
 # entrypoint.sh and cron.sh dependencies
-# 增加aria2
 RUN set -ex; \
     \
     apt-get update; \
@@ -10,24 +9,10 @@ RUN set -ex; \
         rsync \
         bzip2 \
         busybox-static \
-        aria2 \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     \
     mkdir -p /var/spool/cron/crontabs; \
-    \
-    mkdir -p /var/log/aria2c;  \
-    \
-    mkdir -p /var/local/aria2c; \
-
-    echo '' > /var/log/aria2c/aria2c.log; \
-    \
-    echo '' > /var/local/aria2c/aria2c.sess; \
-    \
-    chown www-data.www-data -R /var/log/aria2c /var/local/aria2c; \
-    \
-    chmod 770 -R /var/log/aria2c /var/local/aria2c; \
-    \
     echo '*/15 * * * * php -f /var/www/html/cron.php' > /var/spool/cron/crontabs/www-data
 
 # install the PHP extensions we need
