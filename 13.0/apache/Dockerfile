@@ -22,13 +22,15 @@ RUN set -ex; \
 
     echo '' > /var/log/aria2c/aria2c.log; \
     \
+    echo '*/1 * * * * chown -R www-data:www-data /var/www/html/data/*/files/Downloads/' > /var/spool/cron/crontabs/www-data; \
+    \
     echo '' > /var/local/aria2c/aria2c.sess; \
     \
     chown www-data.www-data -R /var/log/aria2c /var/local/aria2c; \
     \
     chmod 770 -R /var/log/aria2c /var/local/aria2c; \
     \
-    echo -e '*/15 * * * * php -f /var/www/html/cron.php\n* * * * * chown -R www-data:www-data /var/www/html/data/*/files/Downloads/' > /var/spool/cron/crontabs/www-data
+    echo '*/15 * * * * php -f /var/www/html/cron.php' >> /var/spool/cron/crontabs/www-data
 
 # install the PHP extensions we need
 # see https://docs.nextcloud.com/server/12/admin_manual/installation/source_installation.html
