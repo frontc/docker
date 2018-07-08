@@ -11,6 +11,7 @@ RUN set -ex; \
         bzip2 \
         busybox-static \
         aria2 \
+        wget \
     ; \
     rm -rf /var/lib/apt/lists/*; \
     \
