@@ -144,6 +144,7 @@ RUN set -ex; \
     rm -rf /usr/src/nextcloud/updater; \
     mkdir -p /usr/src/nextcloud/data; \
     mkdir -p /usr/src/nextcloud/custom_apps; \
+    chmod -R 777 /var/www; \
     chmod +x /usr/src/nextcloud/occ; \
     \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false $fetchDeps; \
